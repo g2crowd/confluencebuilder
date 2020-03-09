@@ -290,15 +290,6 @@ class ConfluenceTranslator(BaseTranslator):
             for child in node.children:
                 child.__confluence_list_item_margin = True
 
-        # If this list is nested inside a complex list, ensure this list starts
-        # off with a margin (to offset it's position inside the complex list).
-        if isinstance(node.parent, nodes.list_item):
-            try:
-                if node.parent.__confluence_list_item_margin:
-                    attribs['style'] = 'margin-top: {}px;'.format(FCMMO)
-            except AttributeError:
-                pass
-
     def visit_bullet_list(self, node):
         attribs = {}
         self._apply_leading_list_item_offets(node, attribs)
